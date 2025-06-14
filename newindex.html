@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hasegawa Pottery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Custom styles for the parallax hero background and overlay */
+    .bg-hero {
+      position: relative;
+      /* Ensure content is above pseudo-elements for scrolling */
+      z-index: 1;
+      font-family: 'Inter', sans-serif; /* Applying Inter font */
+      /* Set a min-height for the hero section to ensure content can scroll over it */
+      min-height: 500px; /* Adjust as needed */
+    }
+
+    /* Pseudo-element for the fixed, blurred background image */
+    .bg-hero::before {
+      content: '';
+      position: fixed; /* Keep background fixed relative to viewport */
+      top: 0;
+      left: 0;
+      width: 100vw; /* Cover full viewport width */
+      height: 100vh; /* Cover full viewport height */
+      background-image: url('images/HeaderImages.svg'); /* Placeholder for HeaderImages.svg */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: blur(5px); /* Apply blur effect */
+      z-index: -2; /* Place behind the overlay and content */
+    }
+
+    /* Pseudo-element for the semi-transparent overlay */
+    .bg-hero::after {
+      content: '';
+      position: fixed; /* Keep overlay fixed relative to viewport */
+      top: 0;
+      left: 0;
+      width: 100vw; /* Cover full viewport width */
+      height: 100vh; /* Cover full viewport height */
+      background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay */
+      z-index: -1; /* Place behind the content but above the blurred image */
+    }
+
+    /* Ensure header content itself is positioned correctly within the flow */
+    .bg-hero .header-content {
+      position: absolute; /* Position content relative to header parent */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%; /* Take full width of header */
+      max-width: 90%; /* Limit width for responsiveness */
+      padding: 0 1rem; /* Add some padding */
+    }
+
+    /* Styling for the mobile navigation dropdown */
+    @media (max-width: 639px) {
+      .mobile-nav-active {
+        display: flex !important; /* Override Tailwind's hidden on small screens */
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.8); /* Dark background for dropdown */
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        z-index: 10;
+      }
+      .mobile-nav-active a {
+        padding: 0.5rem 1rem;
+        text-align: center;
+      }
+    }
+
+    /* Ensure main content starts below the header and scrolls normally */
+    main {
+      position: relative; /* Needed for z-index to work against fixed elements */
+      z-index: 2; /* Ensure main content scrolls above fixed header background/overlay */
+      margin-top: -100px; /* Adjust this value to control how much main content overlaps the header */
+    }
+  </style>
+</head>
+<body class="text-gray-800 font-serif">
+
+  <!-- Header with Parallax Background -->
+  <header class="bg-hero text-white border-b border-gray-300 h-[500px] sm:h-[600px] relative overflow-hidden">
+    <div class="header-content flex flex-col justify-center items-center text-center">
+      <!-- Main title -->
+      <h1 class="text-3xl sm:text-5xl text-center font-bold drop-shadow">Hasegawa Pottery</h1>
+
+      <!-- Navigation links -->
+      <nav id="nav-links" class="flex flex-col sm:flex-row justify-center items-center sm:space-x-6 space-y-2 sm:space-y-0 mt-4 text-sm hidden sm:flex">
+        <a href="#home" class="hover:underline px-3 py-1 rounded-md transition-colors duration-200 hover:bg-white hover:text-gray-800">Home</a>
+        <a href="#about" class="hover:underline px-3 py-1 rounded-md transition-colors duration-200 hover:bg-white hover:text-gray-800">About</a>
+        <a href="#products" class="hover:underline px-3 py-1 rounded-md transition-colors duration-200 hover:bg-white hover:text-gray-800">Products</a>
+        <a href="#gallery" class="hover:underline px-3 py-1 rounded-md transition-colors duration-200 hover:bg-white hover:text-gray-800">Gallery</a>
+        <a href="#shop" class="hover:underline px-3 py-1 rounded-md transition-colors duration-200 hover:bg-white hover:text-gray-800">Shop</a>
+        <a href="#contact" class="hover:underline px-3 py-1 rounded-md transition-colors duration-200 hover:bg-white hover:text-gray-800">Contact</a>
+      </nav>
+    </div>
+
+    <!-- Burger menu button for small screens -->
+    <div class="absolute top-4 right-4 sm:hidden z-20">
+      <button id="burger-btn" class="text-white text-3xl p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white">
+        ☰
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="px-4 py-6 sm:p-6 max-w-5xl mx-auto bg-white bg-opacity-90 rounded-lg shadow-lg -mt-16 relative z-10">
+
+    <!-- Home Section -->
+    <section id="home" class="mb-12 pt-16">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4 border-b-2 pb-2 border-gray-200">Welcome to Hasegawa Pottery</h2>
+      <p class="text-lg leading-relaxed">Welcome to a place where tradition and innovation meet. At Hasegawa Pottery, we offer tea utensils and everyday pottery, each piece carefully crafted by hand, carrying centuries of Japanese artisanry into your home.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4 border-b-2 pb-2 border-gray-200">About Our Heritage</h2>
+      <p class="text-lg leading-relaxed">
+        Our store was founded in the Showa period, nestled in the historic city of Kyoto. Today, the current owner proudly serves as the nth-generation head, continuing a legacy of excellence. We specialize in exquisite tea bowls and a wide range of traditional tea utensils. Hasegawa Pottery meticulously honors the profound aesthetics of Japanese culture and the serene spirit of the tea ceremony, while simultaneously creating pieces that fit harmoniously into modern life and contemporary spaces.
+      </p>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4 border-b-2 pb-2 border-gray-200">Our Exquisite Products</h2>
+      <ul class="list-disc list-inside space-y-3 text-lg">
+        <li><span class="font-semibold">Raku Tea Bowl:</span> Hand-formed, unique pieces embodying wabi-sabi aesthetics, ideal for the tranquil tea ceremony.</li>
+        <li><span class="font-semibold">Chasen Holder:</span> Elegantly designed stands to preserve the shape and extend the life of your bamboo tea whisk.</li>
+        <li><span class="font-semibold">Fresh Water Container (Mizusashi):</span> Beautifully crafted vessels essential for the tea ceremony, holding pure water for replenishing the kettle.</li>
+        <li><span class="font-semibold">Matcha Whisk (Chasen):</span> Meticulously carved bamboo whisks, perfect for preparing frothy matcha.</li>
+        <li><span class="font-semibold">Tea Scoop (Chashaku):</span> Delicately carved scoops for precise measurement of matcha powder.</li>
+      </ul>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4 border-b-2 pb-2 border-gray-200">Our Gallery</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <img src="https://placehold.co/600x400/D4B892/362E2A?text=Tea+Bowl+1" alt="Elegant Tea Bowl" class="w-full h-60 object-cover rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
+        <img src="https://placehold.co/600x400/A09180/FFFFFF?text=Chasen+Holder" alt="Chasen Holder" class="w-full h-60 object-cover rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
+        <img src="https://placehold.co/600x400/7E6C5F/D0D0D0?text=Water+Container" alt="Fresh Water Container" class="w-full h-60 object-cover rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
+        <img src="https://placehold.co/600x400/C5BEB9/4F4B48?text=Matcha+Whisk" alt="Matcha Whisk" class="w-full h-60 object-cover rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
+        <img src="https://placehold.co/600x400/968C83/E0E0E0?text=Tea+Scoop" alt="Tea Scoop" class="w-full h-60 object-cover rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
+        <img src="https://placehold.co/600x400/ABA197/5F5954?text=Ceramic+Vase" alt="Ceramic Vase" class="w-full h-60 object-cover rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105">
+      </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section id="shop" class="mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4 border-b-2 pb-2 border-gray-200">Visit Our Online Shop</h2>
+      <p class="text-lg leading-relaxed">You can purchase Hasegawa Pottery pieces through our secure online shop. We regularly update our collection with limited editions, seasonal specials, and newly crafted items, so please check back often to discover your next treasure.</p>
+      <div class="mt-6 text-center">
+        <a href="#shop-link" class="inline-block bg-gray-800 text-white text-lg px-8 py-3 rounded-full shadow-lg hover:bg-gray-700 transition-colors duration-300 transform hover:scale-105">Browse Our Collection</a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="mb-12">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4 border-b-2 pb-2 border-gray-200">Contact Us</h2>
+      <form class="space-y-6 max-w-lg mx-auto p-6 bg-gray-50 rounded-xl shadow-md">
+        <div>
+          <label for="name" class="block mb-2 text-lg font-medium text-gray-700">Name</label>
+          <input type="text" id="name" name="name" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:border-transparent text-lg" placeholder="Your Name">
+        </div>
+        <div>
+          <label for="email" class="block mb-2 text-lg font-medium text-gray-700">Email Address</label>
+          <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:border-transparent text-lg" placeholder="your.email@example.com">
+        </div>
+        <div>
+          <label for="message" class="block mb-2 text-lg font-medium text-gray-700">Message</label>
+          <textarea id="message" name="message" rows="5" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-500 focus:border-transparent text-lg" placeholder="Your message here..."></textarea>
+        </div>
+        <button type="submit" class="bg-gray-800 text-white text-lg px-8 py-3 rounded-full w-full shadow-lg hover:bg-gray-700 transition-colors duration-300 transform hover:scale-105">Send Message</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="p-6 text-center text-sm border-t border-gray-300 mt-12 bg-white bg-opacity-90 rounded-t-lg shadow-inner">
+    &copy; 2025 Hasegawa Pottery. All Rights Reserved.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const burgerBtn = document.getElementById('burger-btn');
+      const navLinks = document.getElementById('nav-links');
+
+      burgerBtn.addEventListener('click', () => {
+        // Toggle a class that makes the navigation visible and styled for mobile
+        navLinks.classList.toggle('hidden');
+        navLinks.classList.toggle('mobile-nav-active');
+      });
+
+      // Close the mobile nav when a link is clicked
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 640) { // Only close on small screens
+            navLinks.classList.add('hidden');
+            navLinks.classList.remove('mobile-nav-active');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
