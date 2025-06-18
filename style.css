@@ -1,0 +1,109 @@
+/* Custom styles for the parallax hero background and overlay */
+.bg-hero {
+    position: relative;
+    /* Ensure content is above pseudo-elements for scrolling */
+    z-index: 1;
+    font-family: 'Inter', sans-serif; /* Applying Inter font */
+    /* Set a min-height for the hero section to ensure content can scroll over it */
+    min-height: 500px; /* Adjust as needed */
+}
+
+/* Pseudo-element for the fixed, blurred background image */
+.bg-hero::before {
+    content: '';
+    position: fixed; /* Keep background fixed relative to viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Cover full viewport width */
+    height: 100vh; /* Cover full viewport height */
+    background-image: url('images/HeaderImages.svg'); /* Background Image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*filter: blur(5px); /* Apply blur effect */
+    z-index: -2; /* Place behind the overlay and content */
+}
+
+/* Pseudo-element for the semi-transparent overlay */
+.bg-hero::after {
+    content: '';
+    position: fixed; /* Keep overlay fixed relative to viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Cover full viewport width */
+    height: 100vh; /* Cover full viewport height */
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay */
+    z-index: -1; /* Place behind the content but above the blurred image */
+}
+
+/* Ensure header content itself is positioned correctly within the flow */
+.bg-hero .header-content {
+    position: absolute; /* Position content relative to header parent */
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* Take full width of header */
+    max-width: 90%; /* Limit width for responsiveness */
+    padding: 0 1rem; /* Add some padding */
+}
+
+/* Styling for the mobile navigation dropdown */
+@media (max-width: 639px) {
+    .mobile-nav-active {
+        display: flex !important; /* Override Tailwind's hidden on small screens */
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.8); /* Dark background for dropdown */
+        position: absolute;
+        top: 100%; /* Position below the header */
+        left: 0;
+        width: 100%;
+        padding: 1rem 0;
+        z-index: 10;
+    }
+    .mobile-nav-active a {
+        padding: 0.5rem 1rem;
+        text-align: center;
+    }
+}
+
+/* Ensure main content starts below the header and scrolls normally */
+main {
+    position: relative; /* Needed for z-index to work against fixed elements */
+    z-index: 2; /* Ensure main content scrolls above fixed header background/overlay */
+    margin-top: -100px; /* Adjust this value to control how much main content overlaps the header */
+}
+
+/* NEW CSS FOR WIPE ANIMATION */
+.image-wrapper {
+    position: relative; /* Crucial for absolute positioning of the overlay */
+    overflow: hidden; /* Hides the overlay as it animates off */
+    /* Tailwind classes from your HTML. You might need to move these here or apply to wrapper in HTML */
+    /* @apply rounded-xl shadow-lg w-full h-60; */
+    /*border-radius: 0.75rem;*/ /* For rounded-xl */
+    /*box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* For shadow-lg */
+    /*width: 100%; /* For w-full */
+    /*height: 15rem; /* For h-60 */
+}
+
+.wipe-image {
+    display: block; /* Ensure no extra space below image */
+    width: 100%;
+    height: 100%; /* Image should fill its wrapper */
+    object-fit: cover;
+}
+
+.wipe-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(55, 65, 81, 1); /* bg-gray-800 */
+    transform-origin: left;
+    transition: transform 1.25s ease-out; /* duration-1000 ease-out */
+    transform: scaleX(1); /* Starts fully covering */
+}
+
+.image-wrapper.revealed .wipe-overlay {
+    transform: scaleX(0); /* Scales down to reveal the image */
+}
